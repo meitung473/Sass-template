@@ -1,0 +1,70 @@
+// media query 
+@mixin breakpoint($point)
+	@if $point == pc
+		@media screen and (max-width: 1024px)
+			@content
+	@else if $point == pad
+		@media screen and (max-width: 768px)
+			@content
+	@else if $point == mobile
+		@media screen and (max-width: 320px)
+			@content
+
+// background-image url
+@mixin img-url($name,$format,$path: null)
+	$root: '../../img/'
+	$file: #{$name+'.'+$format}
+	$fullpath: null
+	@if $path
+		$fullpath: #{$root+$path+ '/'+$file}
+	@else
+		$fullpath:#{$root+$file}
+	background-image: url(quote(#{$fullpath}))
+
+// // prefix : 後面接瀏覽器 list
+@mixin vendor-prefix($declarations,$prefixes:())
+	@each $property,$value in $declarations
+		@each $prefix in $prefixes
+			#{'-'+$prefix+'-'+$property} : $value
+	
+	#{$property} : $value
+
+// //shape : circle
+@mixin circle($size,$color)
+	width: $size
+	height: $size
+	background-color: $color
+	border-radius: 50%
+
+// //shape : triangle
+@mixin triangle($size,$pos,$color,$ratio :1)
+	width: 0
+	height: 0
+	@if $pos == top
+		border-bottom: $size*$ratio solid $color
+		border-left: $size/2 solid transparent
+		border-right: $size/2 solid transparent
+	@else if $pos == top-left
+		border-top: $size solid $color
+		border-left: $size solid transparent
+	@else if $pos == top-right
+		border-top: $size solid $color
+		border-right: $size solid transparent
+	@else if $pos == bottom
+		border-top: $size*$ratio solid $color
+		border-left: $size/2 solid transparent
+		border-right: $size/2 solid transparent
+	@else if $pos == bottom-left
+		border-bottom: $size solid $color
+		border-right: $size solid transparent
+	@else if $pos == bottom-right
+		border-bottom: $size solid $color
+		border-left: $size solid transparent
+	@else if $pos == right
+		border-top: $size/2 solid transparent 
+		border-left: $size*$ratio solid $color
+		border-bottom: $size/2 solid transparent
+	@else if $pos == left
+		border-top: $size/2 solid transparent 
+		border-right: $size*$ratio solid $color
+		border-bottom: $size/2 solid transparent
