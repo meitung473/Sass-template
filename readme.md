@@ -11,7 +11,7 @@
         |- utils : variable、mixin、extend 等等
         |- vendors : 放 sass-plugin
         |- section (目前沒有) :  頁面區塊，hero、cta
-    - defalut.sass
+    - app.sass
     - index.html
 ```
 每個資料夾都有 all.sass 整合資料夾內的 @import 
